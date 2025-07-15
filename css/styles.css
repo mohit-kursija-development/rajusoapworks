@@ -1,0 +1,138 @@
+/* Brown theme color */
+:root {
+  --brown: #795548;
+  --brown-light: #bcaaa4;
+  --yellow: #fdfad5;
+}
+
+/* Section transitions */
+.page-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity;
+}
+.page-section.active {
+  display: block;
+  opacity: 1;
+  animation: fadeInUp 0.7s;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+/* Navbar highlight */
+.nav-link.active {
+  font-weight: bold;
+  color: var(--brown) !important;
+  border-bottom: 2px solid var(--brown);
+}
+/* Hero section */
+.hero {
+  background: linear-gradient(120deg, #efebe9 0%, #fdfad5 100%);
+  border-radius: 1rem;
+  padding: 1.5rem 0.8rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.product-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+.contact-form input, .contact-form textarea {
+  border-radius: 0.5rem;
+}
+.lead{
+    text-align: center;
+}
+.footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0 0.5rem 0;
+  background: #f8f9fa;
+  text-align: center;
+  border-radius: 1rem 1rem 0 0;
+  font-size: 0.95rem;
+  color: #888;
+}
+
+/* Brown button */
+.btn-yellow {
+  background-color: var(--brown);
+  border-color: var(--brown);
+  color: var(--yellow);
+}
+.btn-yellow:hover, .btn-yellow:focus, .btn-yellow::after {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--brown);
+}
+
+/* Brown button */
+.btn-brown {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--brown);
+}
+.btn-brown:hover, .btn-brown:focus, .btn-brown::after {
+  background-color: var(--brown);
+  border-color: var(--brown);
+  color: var(--brown);
+}
+
+.prod-btn{
+  /* width: 18rem; */
+}
+
+@keyframes bgColorCycle {
+  0%   { background-color: var(--brown); }
+  33%  { background-color: var(--brown-light); }
+  66%  { background-color: var(--yellow); }
+  100% { background-color: var(--brown); }
+}
+
+.animated-card {
+  animation: bgColorCycle 10s infinite ease-in-out;
+  transition: background-color 2s;
+}
+
+.best-sellers{
+  background-color: var(--brown);
+}
+
+/* Brown icon/text utility */
+.text-brown {
+  color: var(--brown) !important;
+}
+.text-yellow{
+  color: var(--yellow);
+}
+
+/* Light golden brown for navbar */
+.navbar,
+.navbar .navbar-collapse {
+  background: #fdfad5 !important; /* light golden brown */
+}
+
+/* Remove default toggler icon styles */
+.custom-toggler {
+  border: none;
+  padding: 0;
+}
+
+/* Optional: adjust vertical alignment if needed */
+.custom-toggler img {
+  display: block;
+}
+
+.toggler-icon{
+    width: 55px;
+}
+
+/* Optional: style nav menu dropdowns if any */
+.navbar-nav .nav-link {
+  background: transparent;
+}

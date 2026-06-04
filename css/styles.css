@@ -27,6 +27,11 @@
   color: var(--brown) !important;
   border-bottom: 2px solid var(--brown);
 }
+.logo{
+  width: 50px;
+  height: auto;
+}
+
 /* Hero section */
 .hero {
   background: linear-gradient(120deg, #efebe9 0%, #fdfad5 100%);
@@ -87,6 +92,31 @@
   /* width: 18rem; */
 }
 
+.product{
+  width:100%;
+}
+.product .card{
+    height:100%;
+}
+
+.product-image-wrap{
+    height:180px;           /* same height for all images */
+    padding:10px;           /* space around image */
+    display:flex;
+    align-items:center;     /* vertical center */
+    justify-content:center; /* horizontal center */
+    background:#fff;
+}
+
+.product-image-wrap img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit:contain;     /* fit without stretching */
+    display:block;
+}
+
 @keyframes bgColorCycle {
   0%   { background-color: var(--brown); }
   33%  { background-color: var(--brown-light); }
@@ -135,4 +165,19 @@
 /* Optional: style nav menu dropdowns if any */
 .navbar-nav .nav-link {
   background: transparent;
+}
+
+
+.all-prdcts-img{
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+}
+
+/* For mobile devices */
+@media (max-width: 767px) {
+  .all-prdcts-img {
+    max-width: 100%;
+    height: 400px;
+  }
 }

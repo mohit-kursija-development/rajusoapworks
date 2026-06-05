@@ -124,14 +124,14 @@ const productContainer = document.querySelector('.product');
 products.forEach(item => {
 
     const card = document.createElement('div');
-    card.className = 'col-6 col-md-3 mb-3';
+    card.className = 'col-6 mb-3';
 
     card.innerHTML = `
         <div class="card h-100">
 
             <div class="product-image-wrap">
                 <img
-                    src="images/${item.image}"
+                    src="images${item.image}"
                     alt="${item.name}"
                     onerror="this.style.display='none'"
                 >
@@ -144,6 +144,40 @@ products.forEach(item => {
         </div>
     `;
 
-    productContainer.appendChild(card);
+    card.addEventListener('click', () => openProductModal(item));
 
+    productContainer.appendChild(card);
 });
+
+function openProductModal(product){
+    const modalEl = document.getElementById('productModal');
+
+    document.getElementById('modalProductName').textContent = product.name;
+
+    document.getElementById('modalProductImage').src = `images${product.image}`;
+
+    let html = '';
+
+    Object.entries(product).forEach(([key,value]) => {
+
+        if(key === 'id' || key === 'image') return;
+
+        html += `
+            <tr>
+                <th>${key}</th>
+                <td>${value}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById('modalProductDetails').innerHTML = html;
+
+    bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    // document.getElementById('modalProductDetails').innerHTML = html;
+
+    // const modal = new bootstrap.Modal(
+    //     document.getElementById('productModal')
+    // );
+
+    // modal.show();
+}

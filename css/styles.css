@@ -94,10 +94,38 @@
 
 .product{
   width:100%;
+  margin-left: 0;
 }
 .product .card{
     height:100%;
 }
+.card{
+  border: 1px solid lightyellow;
+}
+.product .card{
+    height:100%;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.product .card:hover{
+    transform:translateY(-2px);
+}
+
+.product-image-wrap{
+    height:180px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.product-image-wrap img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+}
+
 
 .product-image-wrap{
     height:180px;           /* same height for all images */
@@ -180,4 +208,21 @@
     max-width: 100%;
     height: 400px;
   }
+}
+
+/* Modal styling fix */
+.modal {
+  z-index: 1050 !important;
+}
+
+.modal.show {
+  display: flex !important;
+}
+
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
 }

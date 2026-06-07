@@ -124,7 +124,7 @@ const productContainer = document.querySelector('.product');
 products.forEach(item => {
 
     const card = document.createElement('div');
-    card.className = 'col-6 mb-3';
+    card.className = 'col-md-4 col-6 mb-3';
 
     card.innerHTML = `
         <div class="card h-100">
@@ -149,35 +149,39 @@ products.forEach(item => {
     productContainer.appendChild(card);
 });
 
-function openProductModal(product){
-    const modalEl = document.getElementById('productModal');
+function openProductModal(product) {
+// Show image as well.
+    const modalImage = document.getElementById('modalProductImage');
+    if (product.image) {
+        modalImage.src = `images${product.image}`;
+        modalImage.style.display = 'block';
+    } else {
+        modalImage.style.display = 'none';
+    }
 
-    document.getElementById('modalProductName').textContent = product.name;
+    document.getElementById('modalProductName').textContent =
+        product.name || '';
 
-    document.getElementById('modalProductImage').src = `images${product.image}`;
+    document.getElementById('modalProductIngredients').textContent =
+        product.Ingredients || '';
 
-    let html = '';
+    document.getElementById('modalProductPieces').textContent =
+        product['Pieces in Pack'] || '';
 
-    Object.entries(product).forEach(([key,value]) => {
+    document.getElementById('modalProductPacks').textContent =
+        product['Packs per Box'] || '';
 
-        if(key === 'id' || key === 'image') return;
-
-        html += `
-            <tr>
-                <th>${key}</th>
-                <td>${value}</td>
-            </tr>
-        `;
-    });
-
-    document.getElementById('modalProductDetails').innerHTML = html;
-
-    bootstrap.Modal.getOrCreateInstance(modalEl).show();
-    // document.getElementById('modalProductDetails').innerHTML = html;
-
-    // const modal = new bootstrap.Modal(
-    //     document.getElementById('productModal')
-    // );
-
-    // modal.show();
+    document.getElementById('customModal').style.display = 'block';
 }
+
+document.querySelector('.custom-modal-close').addEventListener('click', function () {
+    document.getElementById('customModal').style.display = 'none';
+});
+
+window.addEventListener('click', function (e) {
+    const modal = document.getElementById('customModal');
+
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});

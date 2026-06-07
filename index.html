@@ -144,33 +144,35 @@
       </div>
 
       <!-- Bootstrap Modal -->
-    <div class="modal" id="productModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+      <!-- Product Modal -->
+      <div id="customModal" class="custom-modal">
+        <div class="custom-modal-content">
+          <span class="custom-modal-close">&times;</span>
 
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalProductName"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <div class="text-center mb-3 d-flex justify-content-center">
+            <img id="modalProductImage" class="img-fluid" style="max-height:250px;object-fit:contain;">
           </div>
+          <h3 id="modalProductName"></h3>
 
-          <div class="modal-body">
-
-            <div class="text-center mb-3">
-              <img
-                id="modalProductImage"
-                class="img-fluid"
-                style="max-height:250px;object-fit:contain;"
-              >
-            </div>
-
-            <table class="table table-bordered mb-0">
-              <tbody id="modalProductDetails"></tbody>
-            </table>
-          </div>
-
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Ingredients</th>
+                <td id="modalProductIngredients"></td>
+              </tr>
+              <tr>
+                <th>Pieces in Pack</th>
+                <td id="modalProductPieces"></td>
+              </tr>
+              <tr>
+                <th>Packs per Box</th>
+                <td id="modalProductPacks"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+      </div>
     </section>
 
     <!-- Contact Us Section -->

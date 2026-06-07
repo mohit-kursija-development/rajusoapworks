@@ -82,7 +82,7 @@
   border-color: var(--yellow);
   color: var(--brown);
 }
-.btn-brown:hover, .btn-brown:focus, .btn-brown::after {
+ .btn-brown:focus, .btn-brown::after {
   background-color: var(--brown);
   border-color: var(--brown);
   color: var(--brown);
@@ -144,6 +144,58 @@
     object-fit:contain;     /* fit without stretching */
     display:block;
 }
+
+/* Container hides the overflowing content */
+.scroll-container {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  background: #f4f4f4;
+  padding: 10px 0;
+}
+
+/* Track holds both sets side by side */
+.scroll-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 5s linear infinite;
+}
+
+/* Individual item sets */
+.scroll-items {
+  display: flex;
+  /* gap: 20px; */
+  /* padding-right: 20px; Must match gap to maintain continuous layout spacing */
+}
+
+/* Styling for single items */
+.item {
+  width: 150px;
+  height: 80px;
+  background: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* --- THE HOVER PAUSE CONTROLLER --- */
+.scroll-container:hover .scroll-track {
+  animation-play-state: paused;
+}
+
+/* Animation moving items seamlessly leftward */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 
 @keyframes bgColorCycle {
   0%   { background-color: var(--brown); }

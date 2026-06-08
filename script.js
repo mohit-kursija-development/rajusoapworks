@@ -1,23 +1,51 @@
 // Section navigation logic
+// Function to show a specific section
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.page-section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+
+  // Show selected section
+  const activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+    activeSection.classList.add('active');
+  }
+
+  // Update nav active state
+  document.querySelectorAll('.nav-link[data-section]').forEach(nav => {
+    nav.classList.toggle('active', nav.getAttribute('data-section') === sectionId);
+  });
+}
+
+// 1. On Page Load: Check if there is a saved section in localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  const savedSection = localStorage.getItem('activeSection');
+  
+  if (savedSection) {
+    // Show the saved section instead of the main/default one
+    showSection(savedSection);
+  } else {
+    // Optional: If no section is saved, ensure your default/main section is active
+    // showSection('home'); // Uncomment and replace 'home' with your actual main section ID if needed
+  }
+});
+
+// 2. Click Handlers: Update section and save choice to localStorage
 document.querySelectorAll('.nav-link[data-section], .hero a[data-section]').forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
     const section = this.getAttribute('data-section');
     if (!section) return;
-    // Hide all sections
-    document.querySelectorAll('.page-section').forEach(sec => {
-      sec.classList.remove('active');
-    });
-    // Show selected section
-    const activeSection = document.getElementById(section);
-    if (activeSection) {
-      activeSection.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    // Update nav active state
-    document.querySelectorAll('.nav-link[data-section]').forEach(nav => {
-      nav.classList.toggle('active', nav.getAttribute('data-section') === section);
-    });
+
+    // Show the section
+    showSection(section);
+    
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Save the current section to localStorage
+    localStorage.setItem('activeSection', section);
   });
 });
 
@@ -124,7 +152,7 @@ const productContainer = document.querySelector('.product');
 products.forEach(item => {
 
     const card = document.createElement('div');
-    card.className = 'col-md-4 col-6 mb-3';
+    card.className = 'col-md-3 col-6 mb-3';
 
     card.innerHTML = `
         <div class="card h-100">

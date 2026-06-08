@@ -5,6 +5,24 @@
   --yellow: #fdfad5;
 }
 
+.neon-pulse {
+  background: inherit;
+  border: 1px solid inherit;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 242, 254, 0.2), 
+                0 0 10px rgba(0, 242, 254, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.6), 
+                0 0 35px rgba(4facfe, 0.4);
+    transform: scale(1.01); /* Subtle breathing scale */
+  }
+}
+
 /* Section transitions */
 .page-section {
   display: none;
@@ -15,7 +33,7 @@
 .page-section.active {
   display: block;
   opacity: 1;
-  animation: fadeInUp 0.7s;
+  animation: fadeInUp 1s;
 }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px);}
@@ -33,6 +51,12 @@
 }
 
 /* Hero section */
+.home-img{
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 15px ;
+}
+
 .hero {
   background: linear-gradient(120deg, #efebe9 0%, #fdfad5 100%);
   border-radius: 1rem;
@@ -251,7 +275,7 @@
 .all-prdcts-img{
   max-width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 550px;
 }
 
 /* For mobile devices */

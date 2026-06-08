@@ -18,6 +18,45 @@ function showSection(sectionId) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const images = [
+        "images/rsw_home_2.png",
+        "images/rsw_home_3.png",
+        "images/rsw_home_1.png",
+
+
+    ];
+
+    const heroImage = document.getElementById("heroImage");
+
+    let current = 0;
+    let paused = false;
+
+    function changeImage() {
+        if (paused) return;
+
+        current = (current + 1) % images.length;
+
+        heroImage.style.opacity = 0;
+
+        setTimeout(() => {
+            heroImage.src = images[current];
+            heroImage.style.opacity = 1;
+        }, 500);
+    }
+
+    heroImage.style.transition = "opacity 0.5s ease";
+
+    const interval = setInterval(changeImage, 3000);
+
+    heroImage.addEventListener("click", function () {
+        paused = !paused;
+    });
+
+});
+
+
 // 1. On Page Load: Check if there is a saved section in localStorage
 document.addEventListener('DOMContentLoaded', () => {
   const savedSection = localStorage.getItem('activeSection');
@@ -132,7 +171,7 @@ const products = [
     "id": 9,
     "name": "Baghicha Single pack",
     "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/baghicha_single_pack.jpeg",
+    "image": "/baghicha_single_pack.png",
     "Pieces in Pack": 1,
     "Packs per Box": 50
   },

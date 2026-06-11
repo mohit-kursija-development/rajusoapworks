@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "images/rsw_home_2.png",
         "images/rsw_home_3.png",
         "images/rsw_home_1.png",
-
-
     ];
 
     const heroImage = document.getElementById("heroImage");
@@ -251,4 +249,47 @@ window.addEventListener('click', function (e) {
     if (e.target === modal) {
         modal.style.display = 'none';
     }
+});
+
+// Open products section when "View All Products" button is clicked
+document.querySelector('.prod-btn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    showSection('products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    localStorage.setItem('activeSection', 'products');
+});
+
+document.querySelector('.cont-btn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    showSection('contact');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    localStorage.setItem('activeSection', 'contact');
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    result = products.map(item => `
+        <div class="card mx-1 w-100" data-product-id="${item.id}">
+            <div class="product-image-wrap cust-width">
+                <img src="images${item.image}" alt="${item.name}" onerror="this.style.display='none'">
+                <div class="scroll-item-name d-none">${item.name}</div>
+            </div>  
+        </div>
+`).join('');
+
+    document.querySelector('.scroll-items').innerHTML = result + result;
+    
+    // Add click listeners to these cards as well by getting name from hidden div inside card
+    document.querySelectorAll('.scroll-items .card').forEach(card => {
+        card.addEventListener('click', function () {
+            const productName = this.querySelector('.scroll-item-name').textContent;
+            const product = products.find(p => p.name === productName);
+            if (product) {
+                openProductModal(product);
+                showSection('products');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                localStorage.setItem('activeSection', 'products');
+            }
+        });
+    });
+
 });

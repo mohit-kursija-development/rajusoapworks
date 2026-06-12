@@ -86,15 +86,6 @@ document.querySelectorAll('.nav-link[data-section], .hero a[data-section]').forE
   });
 });
 
-// Contact form fake submit
-document.querySelector('.contact-form')?.addEventListener('submit', function (e) {
-  e.preventDefault();
-  document.getElementById('contact-success').classList.remove('d-none');
-  setTimeout(() => {
-    document.getElementById('contact-success').classList.add('d-none');
-    this.reset();
-  }, 2500);
-});
 
 // Set current year in footer
 document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -280,3 +271,64 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const callbackForm = document.getElementById("callbackForm");
+
+  if (callbackForm) {
+    callbackForm.addEventListener("submit", function (event) {
+      // Extract form data
+      const nameInput = document.querySelector("#name");
+      const phoneInput = document.querySelector("#phone");
+      const name = nameInput ? nameInput.value.trim() : "";
+      const phone = phoneInput ? phoneInput.value.trim() : "";
+
+      const popupText = document.getElementById("popupText");
+      const popupMessage = document.getElementById("popupMessage");
+
+      // Validation
+      const nameRegex = /^[A-Za-z ]+$/;
+      const phoneRegex = /^\d{10}$/;
+
+      if (!nameRegex.test(name)) {
+        event.preventDefault(); // Prevents page reload/erasing data
+        if (popupText) popupText.textContent = "Name should only contain letters and spaces.";
+        if (popupMessage) popupMessage.style.display = "block";
+        return;
+      }
+
+      if (!phoneRegex.test(phone)) {
+        event.preventDefault(); // Prevents page reload/erasing data
+        if (popupText) popupText.textContent = "Phone should be exactly 10 digits and contain only numbers.";
+        if (popupMessage) popupMessage.style.display = "block";
+        return;
+      }
+      // If valid, allow normal form submission
+    });
+  }
+  
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      const successMessage = document.getElementById('contact-success');
+      if (successMessage) {
+        successMessage.classList.remove('d-none');
+        setTimeout(() => {
+          successMessage.classList.add('d-none');
+          this.reset();
+        }, 4500);
+      }
+    });
+  }
+});
+
+// Close Popup Function
+function closePopup() {
+  const popupMessage = document.getElementById("popupMessage");
+  if (popupMessage) {
+    popupMessage.style.display = "none";
+  }
+}
+window.closePopup = closePopup;

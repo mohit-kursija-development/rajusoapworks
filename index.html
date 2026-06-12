@@ -173,8 +173,9 @@
       </section>
 
       <!-- Contact Us Section -->
-      <section id="contact" class="page-section" >
+      <section id="contact" class="page-section">
         <h2 class="fw-bold m-3 mb-5 text-center" style="color: #795548">Contact Us</h2>
+
         <div class="row m-0 mb-4">
           <div class="col-md-6 col-12 d-flex justify-content-center flex-column align-items-center">
             <iframe
@@ -199,7 +200,11 @@
           </div>
           <div class="justify-content-center col-md-6 col-12">
             <div class="col-md-6">
-              <form class="contact-form bg-white p-4 rounded shadow-sm">
+              <div id="popupMessage" style="display: none; padding: 20px; border: 1px solid black; background: #fdfad5; z-index: 1000">
+                <p id="popupText"></p>
+                <button onclick="closePopup()">Close</button>
+              </div>
+              <form class="contact-form bg-white p-4 rounded shadow-sm" id="callbackForm" action="https://formsubmit.co/meratimepass2@gmail.com" method="POST">
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" class="form-control" id="name" placeholder="Enter your name" required />

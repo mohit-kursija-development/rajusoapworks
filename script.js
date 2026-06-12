@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
           successMessage.classList.add("d-none");
-        }, 5000);
+        }, 2000);
       } else {
         popupText.textContent =
           "Unable to submit form. Please try again.";

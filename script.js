@@ -20,37 +20,37 @@ function showSection(sectionId) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const images = [
-        "images/rsw_home_2.png",
-        "images/rsw_home_3.png",
-        "images/rsw_home_1.png",
-    ];
+  const images = [
+    "images/rsw_home_2.png",
+    "images/rsw_home_3.png",
+    "images/rsw_home_1.png",
+  ];
 
-    const heroImage = document.getElementById("heroImage");
+  const heroImage = document.getElementById("heroImage");
 
-    let current = 0;
-    let paused = false;
+  let current = 0;
+  let paused = false;
 
-    function changeImage() {
-        if (paused) return;
+  function changeImage() {
+    if (paused) return;
 
-        current = (current + 1) % images.length;
+    current = (current + 1) % images.length;
 
-        heroImage.style.opacity = 0;
+    heroImage.style.opacity = 0;
 
-        setTimeout(() => {
-            heroImage.src = images[current];
-            heroImage.style.opacity = 1;
-        }, 500);
-    }
+    setTimeout(() => {
+      heroImage.src = images[current];
+      heroImage.style.opacity = 1;
+    }, 500);
+  }
 
-    heroImage.style.transition = "opacity 0.5s ease";
+  heroImage.style.transition = "opacity 0.5s ease";
 
-    const interval = setInterval(changeImage, 3000);
+  const interval = setInterval(changeImage, 3000);
 
-    heroImage.addEventListener("click", function () {
-        paused = !paused;
-    });
+  heroImage.addEventListener("click", function () {
+    paused = !paused;
+  });
 
 });
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 1. On Page Load: Check if there is a saved section in localStorage
 document.addEventListener('DOMContentLoaded', () => {
   const savedSection = localStorage.getItem('activeSection');
-  
+
   if (savedSection) {
     // Show the saved section instead of the main/default one
     showSection(savedSection);
@@ -77,7 +77,7 @@ document.querySelectorAll('.nav-link[data-section], .hero a[data-section]').forE
 
     // Show the section
     showSection(section);
-    
+
     // Smooth scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -103,83 +103,73 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
 const products = [
   {
     "id": 1,
-    "name": "Raju Gota Long 5 Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
+    "name": "Raju Gota 5 pcs",
     "image": "/raju_long_pack.jpeg",
-    "Pieces in Pack": 5,
-    "Packs per Box": 10
+    "Packet Contains": "5 Cake",
+    "Box Of": "10 Packets"
   },
   {
     "id": 2,
-    "name": "Raju Gota Green Single Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/raju_single_green.jpeg",
-    "Pieces in Pack": 1,
-    "Packs per Box": 50
+    "name": "Raju Coconut 4 pcs",
+    "image": "/raju_coconut_four_pack.jpeg",
+    "Packet Contains": "4 Cake",
+    "Box Of": "10 Packets"
   },
   {
     "id": 3,
-    "name": "Raju Gota Single Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/raju_single.jpeg",
-    "Pieces in Pack": 1,
-    "Packs per Box": 60
+    "name": "Baghicha 6 pcs",
+    "image": "/baghicha_six_pack_front.jpeg",
+    "Packet Contains": "6 Cake",
+    "Box Of": "12 Packets"
   },
   {
     "id": 4,
-    "name": "Raju Super Single Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/raju_super_single.jpeg",
-    "Pieces in Pack": 1,
-    "Packs per Box": 60
+    "name": "Baghicha 5 pcs",
+    "image": "/baghicha_long_pack.jpeg",
+    "Packet Contains": "5 Cake",
+    "Box Of": "10 Packets"
   },
   {
     "id": 5,
-    "name": "Raju Coconut 4 pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Coconut acid oils / Coconut Oil, Essence",
-    "image": "/raju_coconut_four_pack.jpeg",
-    "Pieces in Pack": 4,
-    "Packs per Box": 10
+    "name": "Raju Gota Single",
+    "image": "/raju_single_green.jpeg",
+    "Packet Contains": "1 Cake",
+    "Box Of": "50 Packets"
   },
   {
     "id": 6,
-    "name": "Raju Coconut Single Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Coconut acid oils / Coconut Oil, Essence",
+    "name": "Raju Coconut Single",
     "image": "/raju_coconut_single.jpeg",
-    "Pieces in Pack": 1,
-    "Packs per Box": "60 / 30"
+    "Packet Contains": "1 Cake",
+    "Box Of": "60 / 30 Packets"
   },
   {
     "id": 7,
-    "name": "Baghicha 6 pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/baghicha_six_pack_front.jpeg",
-    "Pieces in Pack": 6,
-    "Packs per Box": 12
+    "name": "Raju Gota Single",
+    "image": "/raju_single.jpeg",
+    "Packet Contains": "1 Cake",
+    "Box Of": "60 Packets"
   },
   {
     "id": 8,
-    "name": "Baghicha Long 5 pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/baghicha_long_pack.jpeg",
-    "Pieces in Pack": 5,
-    "Packs per Box": 10
+    "name": "Anil Single",
+    "image": "/anil_single.jpeg",
+    "Packet Contains": "1 Cake",
+    "Box Of": "50 Packets"
   },
   {
     "id": 9,
-    "name": "Baghicha Single pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
+    "name": "Baghicha Single",
     "image": "/baghicha_single_pack.png",
-    "Pieces in Pack": 1,
-    "Packs per Box": 50
+    "Packet Contains": "1 Cake",
+    "Box Of": "50 Packets"
   },
   {
     "id": 10,
-    "name": "Anil Single Pack",
-    "Ingredients": "Acid Oil, Fatty Acids, Essential oils, Essence",
-    "image": "/anil_single.jpeg",
-    "Pieces in Pack": 1,
-    "Packs per Box": 50
+    "name": "Raju Super Single",
+    "image": "/raju_super_single.jpeg",
+    "Packet Contains": "1 Cake",
+    "Box Of": "60 Packets"
   }
 ];
 
@@ -188,10 +178,10 @@ const productContainer = document.querySelector('.product');
 
 products.forEach(item => {
 
-    const card = document.createElement('div');
-    card.className = 'col-md-3 col-6 mb-3';
+  const card = document.createElement('div');
+  card.className = 'col-md-3 col-6 mb-3';
 
-    card.innerHTML = `
+  card.innerHTML = `
         <div class="card h-100">
 
             <div class="product-image-wrap">
@@ -209,65 +199,62 @@ products.forEach(item => {
         </div>
     `;
 
-    card.addEventListener('click', () => openProductModal(item));
+  card.addEventListener('click', () => openProductModal(item));
 
-    productContainer.appendChild(card);
+  productContainer.appendChild(card);
 });
 
 function openProductModal(product) {
-// Show image as well.
-    const modalImage = document.getElementById('modalProductImage');
-    if (product.image) {
-        modalImage.src = `images${product.image}`;
-        modalImage.style.display = 'block';
-    } else {
-        modalImage.style.display = 'none';
-    }
+  // Show image as well.
+  const modalImage = document.getElementById('modalProductImage');
+  if (product.image) {
+    modalImage.src = `images${product.image}`;
+    modalImage.style.display = 'block';
+  } else {
+    modalImage.style.display = 'none';
+  }
 
-    document.getElementById('modalProductName').textContent =
-        product.name || '';
+  document.getElementById('modalProductName').textContent =
+    product.name || '';
 
-    document.getElementById('modalProductIngredients').textContent =
-        product.Ingredients || '';
+  document.getElementById('modalProductPieces').textContent =
+    product['Packet Contains'] || '';
 
-    document.getElementById('modalProductPieces').textContent =
-        product['Pieces in Pack'] || '';
+  document.getElementById('modalProductPacks').textContent =
+    product['Box Of'] || '';
 
-    document.getElementById('modalProductPacks').textContent =
-        product['Packs per Box'] || '';
-
-    document.getElementById('customModal').style.display = 'block';
+  document.getElementById('customModal').style.display = 'block';
 }
 
 document.querySelector('.custom-modal-close').addEventListener('click', function () {
-    document.getElementById('customModal').style.display = 'none';
+  document.getElementById('customModal').style.display = 'none';
 });
 
 window.addEventListener('click', function (e) {
-    const modal = document.getElementById('customModal');
+  const modal = document.getElementById('customModal');
 
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
 });
 
 // Open products section when "View All Products" button is clicked
 document.querySelector('.prod-btn')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    showSection('products');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    localStorage.setItem('activeSection', 'products');
+  e.preventDefault();
+  showSection('products');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  localStorage.setItem('activeSection', 'products');
 });
 
 document.querySelector('.cont-btn')?.addEventListener('click', function (e) {
-    e.preventDefault();
-    showSection('contact');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    localStorage.setItem('activeSection', 'contact');
+  e.preventDefault();
+  showSection('contact');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  localStorage.setItem('activeSection', 'contact');
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    result = products.map(item => `
+  result = products.map(item => `
         <div class="card mx-1 w-100" data-product-id="${item.id}">
             <div class="product-image-wrap cust-width">
                 <img src="images${item.image}" alt="${item.name}" onerror="this.style.display='none'">
@@ -276,20 +263,20 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
 `).join('');
 
-    document.querySelector('.scroll-items').innerHTML = result + result;
-    
-    // Add click listeners to these cards as well by getting name from hidden div inside card
-    document.querySelectorAll('.scroll-items .card').forEach(card => {
-        card.addEventListener('click', function () {
-            const productName = this.querySelector('.scroll-item-name').textContent;
-            const product = products.find(p => p.name === productName);
-            if (product) {
-                openProductModal(product);
-                showSection('products');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                localStorage.setItem('activeSection', 'products');
-            }
-        });
+  document.querySelector('.scroll-items').innerHTML = result + result;
+
+  // Add click listeners to these cards as well by getting name from hidden div inside card
+  document.querySelectorAll('.scroll-items .card').forEach(card => {
+    card.addEventListener('click', function () {
+      const productName = this.querySelector('.scroll-item-name').textContent;
+      const product = products.find(p => p.name === productName);
+      if (product) {
+        openProductModal(product);
+        showSection('products');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        localStorage.setItem('activeSection', 'products');
+      }
     });
+  });
 
 });

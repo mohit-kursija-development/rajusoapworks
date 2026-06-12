@@ -272,75 +272,88 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("callbackForm");
 
-  if (!form) return;
-
-  form.addEventListener("submit", function (event) {
-    const nameInput = document.getElementById("name");
-    const phoneInput = document.getElementById("phone");
-
-    const name = nameInput ? nameInput.value.trim() : "";
-    const phone = phoneInput ? phoneInput.value.trim() : "";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     const popupText = document.getElementById("popupText");
     const popupMessage = document.getElementById("popupMessage");
+    const successMessage = document.getElementById("contact-success");
 
-    // Hide previous error
-    if (popupMessage) {
-      popupMessage.style.display = "none";
-    }
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-    // Validation
     const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
-    const phoneRegex = /^[6-9]\d{9}$/; // Indian mobile numbers
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[6-9]\d{9}$/;
 
-    let errorMessage = "";
+    let error = "";
 
-    if (!name) {
-      errorMessage = "Name is required.";
-    } else if (!nameRegex.test(name)) {
-      errorMessage =
-        "Name should contain only letters and single spaces between words.";
-    } else if (name.length < 2) {
-      errorMessage = "Name must be at least 2 characters long.";
-    } else if (!phone) {
-      errorMessage = "Phone number is required.";
+    if (!nameRegex.test(name)) {
+      error = "Please enter a valid name.";
+    } else if (!emailRegex.test(email)) {
+      error = "Please enter a valid email address.";
     } else if (!phoneRegex.test(phone)) {
-      errorMessage =
-        "Phone number must be a valid 10-digit Indian mobile number.";
+      error = "Please enter a valid 10-digit mobile number.";
+    } else if (message.length < 5) {
+      error = "Message should contain at least 5 characters.";
     }
 
-    if (errorMessage) {
-      event.preventDefault();
-
-      if (popupText) {
-        popupText.textContent = errorMessage;
-      }
-
-      if (popupMessage) {
-        popupMessage.style.display = "block";
-      }
-
+    if (error) {
+      popupText.textContent = error;
+      popupMessage.style.display = "block";
       return;
     }
 
-    // Validation passed
-    // DO NOT call event.preventDefault()
-    // FormSubmit needs the form to submit normally
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/9005f8cf26dc911de4546f409a6a5587",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            message,
+            _subject: "New Website Enquiry"
+          })
+        }
+      );
 
-    const successMessage = document.getElementById("contact-success");
+      const result = await response.json();
 
-    if (successMessage) {
-      successMessage.classList.remove("d-none");
+      if (result.success === "true" || result.success === true) {
+        successMessage.classList.remove("d-none");
+        form.reset();
 
-      setTimeout(() => {
-        successMessage.classList.add("d-none");
-      }, 4500);
+        setTimeout(() => {
+          successMessage.classList.add("d-none");
+        }, 5000);
+      } else {
+        popupText.textContent =
+          "Unable to submit form. Please try again.";
+        popupMessage.style.display = "block";
+      }
+    } catch (err) {
+      popupText.textContent =
+        "Network error. Please try again later.";
+      popupMessage.style.display = "block";
+      console.error(err);
     }
   });
 });
+
+function closePopup() {
+  document.getElementById("popupMessage").style.display = "none";
+}
 
 // Close Popup Function
 function closePopup() {

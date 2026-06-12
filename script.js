@@ -273,55 +273,73 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const callbackForm = document.getElementById("callbackForm");
+  const form = document.getElementById("callbackForm");
 
-  if (callbackForm) {
-    callbackForm.addEventListener("submit", function (event) {
-      // Extract form data
-      const nameInput = document.querySelector("#name");
-      const phoneInput = document.querySelector("#phone");
-      const name = nameInput ? nameInput.value.trim() : "";
-      const phone = phoneInput ? phoneInput.value.trim() : "";
+  if (!form) return;
 
-      const popupText = document.getElementById("popupText");
-      const popupMessage = document.getElementById("popupMessage");
+  form.addEventListener("submit", function (event) {
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
 
-      // Validation
-      const nameRegex = /^[A-Za-z ]+$/;
-      const phoneRegex = /^\d{10}$/;
+    const name = nameInput ? nameInput.value.trim() : "";
+    const phone = phoneInput ? phoneInput.value.trim() : "";
 
-      if (!nameRegex.test(name)) {
-        event.preventDefault(); // Prevents page reload/erasing data
-        if (popupText) popupText.textContent = "Name should only contain letters and spaces.";
-        if (popupMessage) popupMessage.style.display = "block";
-        return;
+    const popupText = document.getElementById("popupText");
+    const popupMessage = document.getElementById("popupMessage");
+
+    // Hide previous error
+    if (popupMessage) {
+      popupMessage.style.display = "none";
+    }
+
+    // Validation
+    const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+    const phoneRegex = /^[6-9]\d{9}$/; // Indian mobile numbers
+
+    let errorMessage = "";
+
+    if (!name) {
+      errorMessage = "Name is required.";
+    } else if (!nameRegex.test(name)) {
+      errorMessage =
+        "Name should contain only letters and single spaces between words.";
+    } else if (name.length < 2) {
+      errorMessage = "Name must be at least 2 characters long.";
+    } else if (!phone) {
+      errorMessage = "Phone number is required.";
+    } else if (!phoneRegex.test(phone)) {
+      errorMessage =
+        "Phone number must be a valid 10-digit Indian mobile number.";
+    }
+
+    if (errorMessage) {
+      event.preventDefault();
+
+      if (popupText) {
+        popupText.textContent = errorMessage;
       }
 
-      if (!phoneRegex.test(phone)) {
-        event.preventDefault(); // Prevents page reload/erasing data
-        if (popupText) popupText.textContent = "Phone should be exactly 10 digits and contain only numbers.";
-        if (popupMessage) popupMessage.style.display = "block";
-        return;
+      if (popupMessage) {
+        popupMessage.style.display = "block";
       }
-      // If valid, allow normal form submission
-    });
-  }
-  
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      
-      const successMessage = document.getElementById('contact-success');
-      if (successMessage) {
-        successMessage.classList.remove('d-none');
-        setTimeout(() => {
-          successMessage.classList.add('d-none');
-          this.reset();
-        }, 4500);
-      }
-    });
-  }
+
+      return;
+    }
+
+    // Validation passed
+    // DO NOT call event.preventDefault()
+    // FormSubmit needs the form to submit normally
+
+    const successMessage = document.getElementById("contact-success");
+
+    if (successMessage) {
+      successMessage.classList.remove("d-none");
+
+      setTimeout(() => {
+        successMessage.classList.add("d-none");
+      }, 4500);
+    }
+  });
 });
 
 // Close Popup Function

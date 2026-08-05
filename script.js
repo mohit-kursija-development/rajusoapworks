@@ -1,33 +1,34 @@
-// Section navigation logic
-// Function to show a specific section
-function showSection(sectionId) {
-  // Hide all sections
-  document.querySelectorAll('.page-section').forEach(sec => {
-    sec.classList.remove('active');
-  });
+// Raju Soap Works — shared script for all pages (home, about, products, contact).
+// This is one flat file loaded on every page; each feature block below is guarded
+// by checking for the DOM element it needs, so it's a no-op on pages that don't have it.
 
-  // Show selected section
-  const activeSection = document.getElementById(sectionId);
-  if (activeSection) {
-    activeSection.classList.add('active');
-  }
+// Production URL — used only for absolute URLs inside structured data (JSON-LD),
+// which must always point at the live site regardless of where the page is opened.
+const SITE_URL = 'https://rajusoapworks.com/';
 
-  // Update nav active state
-  document.querySelectorAll('.nav-link[data-section]').forEach(nav => {
-    nav.classList.toggle('active', nav.getAttribute('data-section') === sectionId);
-  });
-}
+// Path back to the site root, derived from this script's own URL. script.js always
+// lives at the project root, so whatever prefix a page used to load it ('script.js'
+// from the root, '../script.js' from /about/, /products/, /contact/) resolves to the
+// root here. Everything the browser actually fetches or navigates to is built from
+// this, so the site works identically over http(s) and opened directly via file://.
+const SITE_ROOT = document.currentScript ? document.currentScript.src.replace(/script\.js(?:[?#].*)?$/, '') : '';
 
-document.addEventListener("DOMContentLoaded", function () {
+// Set current year in footer (present on every page)
+const currentYearEl = document.getElementById('current-year');
+if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+// ---------------------------------------------------------------------------
+// Hero image rotator (home page only)
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  const heroImage = document.getElementById('heroImage');
+  if (!heroImage) return;
 
   const images = [
-    "images/rsw_home_2.png",
-    "images/rsw_home_3.png",
-    "images/rsw_home_1.png",
+    `${SITE_ROOT}images/rsw_home_2.png`,
+    `${SITE_ROOT}images/rsw_home_3.png`,
+    `${SITE_ROOT}images/rsw_home_1.png`
   ];
-
-  const heroImage = document.getElementById("heroImage");
-
   let current = 0;
   let paused = false;
 
@@ -44,53 +45,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500);
   }
 
-  heroImage.style.transition = "opacity 0.5s ease";
+  heroImage.style.transition = 'opacity 0.5s ease';
+  setInterval(changeImage, 3000);
 
-  const interval = setInterval(changeImage, 3000);
-
-  heroImage.addEventListener("click", function () {
+  heroImage.addEventListener('click', function () {
     paused = !paused;
   });
-
 });
 
-
-// 1. On Page Load: Check if there is a saved section in localStorage
-document.addEventListener('DOMContentLoaded', () => {
-  const savedSection = localStorage.getItem('activeSection');
-
-  if (savedSection) {
-    // Show the saved section instead of the main/default one
-    showSection(savedSection);
-  } else {
-    // Optional: If no section is saved, ensure your default/main section is active
-    // showSection('home'); // Uncomment and replace 'home' with your actual main section ID if needed
-  }
-});
-
-// 2. Click Handlers: Update section and save choice to localStorage
-document.querySelectorAll('.nav-link[data-section], .hero a[data-section]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const section = this.getAttribute('data-section');
-    if (!section) return;
-
-    // Show the section
-    showSection(section);
-
-    // Smooth scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Save the current section to localStorage
-    localStorage.setItem('activeSection', section);
-  });
-});
-
-
-// Set current year in footer
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
-// Store JSON HERE rather than fetching from file
+// ---------------------------------------------------------------------------
+// Product catalog — shared data drives the full grid (products page), the
+// "Best Sellers" carousel (home page) and the Product/ItemList schema
+// (products page). Store JSON here rather than fetching from a file.
+// ---------------------------------------------------------------------------
 const products = [
   {
     "id": 1,
@@ -164,202 +131,255 @@ const products = [
   }
 ];
 
+// Shared copy used for image alt text and Product structured data
+function productImagePath(item) {
+  return `${SITE_ROOT}images${item.image}`;
+}
 
-const productContainer = document.querySelector('.product');
+function productAlt(item) {
+  return `${item.name} — coconut oil washing soap pack by Raju Soap Works`;
+}
 
-products.forEach(item => {
-
-  const card = document.createElement('div');
-  card.className = 'col-md-3 col-6 mb-3';
-
-  card.innerHTML = `
-        <div class="card h-100">
-
-            <div class="product-image-wrap">
-                <img
-                    src="images${item.image}"
-                    alt="${item.name}"
-                    onerror="this.style.display='none'"
-                >
-            </div>
-
-            <div class="card-body text-center">
-                <h6 class="card-title mb-0">${item.name}</h6>
-            </div>
-
-        </div>
-    `;
-
-  card.addEventListener('click', () => openProductModal(item));
-
-  productContainer.appendChild(card);
-});
+function productDescription(item) {
+  return `${item.name} coconut oil washing soap by Raju Soap Works. 100% vegetarian and Jain-friendly, made with no animal fats. Each packet contains ${item['Packet Contains']}, supplied in a box of ${item['Box Of']}.`;
+}
 
 function openProductModal(product) {
-  // Show image as well.
   const modalImage = document.getElementById('modalProductImage');
   if (product.image) {
-    modalImage.src = `images${product.image}`;
+    modalImage.src = productImagePath(product);
+    modalImage.alt = productAlt(product);
     modalImage.style.display = 'block';
   } else {
     modalImage.style.display = 'none';
   }
 
-  document.getElementById('modalProductName').textContent =
-    product.name || '';
-
-  document.getElementById('modalProductPieces').textContent =
-    product['Packet Contains'] || '';
-
-  document.getElementById('modalProductPacks').textContent =
-    product['Box Of'] || '';
+  document.getElementById('modalProductName').textContent = product.name || '';
+  document.getElementById('modalProductPieces').textContent = product['Packet Contains'] || '';
+  document.getElementById('modalProductPacks').textContent = product['Box Of'] || '';
 
   document.getElementById('customModal').style.display = 'block';
 }
 
-document.querySelector('.custom-modal-close').addEventListener('click', function () {
-  document.getElementById('customModal').style.display = 'none';
-});
-
-window.addEventListener('click', function (e) {
+function closeProductModal() {
   const modal = document.getElementById('customModal');
+  if (modal) modal.style.display = 'none';
+}
 
-  if (e.target === modal) {
-    modal.style.display = 'none';
+// ---------------------------------------------------------------------------
+// Full product grid + modal (products page only)
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  const productContainer = document.querySelector('.product');
+  if (!productContainer) return;
+
+  products.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'col-md-3 col-6 mb-3';
+    card.id = `product-${item.id}`;
+
+    card.innerHTML = `
+        <a class="card h-100 text-decoration-none text-reset" href="#product-${item.id}">
+
+            <div class="product-image-wrap">
+                <img
+                    src="${productImagePath(item)}"
+                    alt="${productAlt(item)}"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.style.display='none'"
+                >
+            </div>
+
+            <div class="card-body text-center">
+                <h2 class="card-title h6 mb-1">${item.name}</h2>
+                <p class="card-text small text-muted mb-0">${item['Packet Contains']} per packet &middot; Box of ${item['Box Of']}</p>
+            </div>
+
+        </a>
+    `;
+
+    card.querySelector('a').addEventListener('click', e => {
+      e.preventDefault();
+      openProductModal(item);
+      history.replaceState(null, '', `#product-${item.id}`);
+    });
+
+    productContainer.appendChild(card);
+  });
+
+  // Product / ItemList structured data, generated from the same array that renders the grid
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${SITE_URL}products/#product-list`,
+    name: 'Coconut oil soap bars by Raju Soap Works',
+    numberOfItems: products.length,
+    itemListElement: products.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Product',
+        '@id': `${SITE_URL}products/#product-${item.id}`,
+        name: item.name,
+        sku: `RSW-${item.id}`,
+        url: `${SITE_URL}products/#product-${item.id}`,
+        description: productDescription(item),
+        image: `${SITE_URL}images${item.image}`,
+        category: 'Washing soap',
+        material: 'Coconut oil',
+        brand: { '@type': 'Brand', name: 'Raju Soap Works' },
+        manufacturer: { '@id': `${SITE_URL}#business` },
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Packet Contains', value: item['Packet Contains'] },
+          { '@type': 'PropertyValue', name: 'Box Of', value: item['Box Of'] }
+        ]
+      }
+    }))
+  };
+
+  const schemaScript = document.createElement('script');
+  schemaScript.type = 'application/ld+json';
+  schemaScript.textContent = JSON.stringify(schema);
+  document.head.appendChild(schemaScript);
+
+  // Modal close handlers
+  const closeBtn = document.querySelector('.custom-modal-close');
+  closeBtn.addEventListener('click', closeProductModal);
+  closeBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      closeProductModal();
+    }
+  });
+
+  window.addEventListener('click', function (e) {
+    const modal = document.getElementById('customModal');
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeProductModal();
+  });
+
+  // Deep link support: /products/#product-<id> (e.g. from the home page carousel)
+  // opens that product's modal automatically and scrolls its card into view.
+  const hashMatch = window.location.hash.match(/^#product-(\d+)$/);
+  if (hashMatch) {
+    const product = products.find(p => p.id === Number(hashMatch[1]));
+    if (product) {
+      openProductModal(product);
+      document.getElementById(`product-${product.id}`)?.scrollIntoView({ block: 'center' });
+    }
   }
 });
 
-// Open products section when "View All Products" button is clicked
-document.querySelector('.prod-btn')?.addEventListener('click', function (e) {
-  e.preventDefault();
-  showSection('products');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  localStorage.setItem('activeSection', 'products');
-});
-
-document.querySelector('.cont-btn')?.addEventListener('click', function (e) {
-  e.preventDefault();
-  showSection('contact');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  localStorage.setItem('activeSection', 'contact');
-});
-
+// ---------------------------------------------------------------------------
+// "Best Sellers" carousel (home page only) — real links to the products page,
+// so it's crawlable and works even before script.js finishes if middle-clicked.
+// ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
-  result = products.map(item => `
-        <div class="card mx-1 w-100" data-product-id="${item.id}">
+  const track = document.querySelector('.scroll-items');
+  if (!track) return;
+
+  const result = products.map(item => `
+        <a class="card mx-1 w-100 text-decoration-none text-reset" href="${SITE_ROOT}products/index.html#product-${item.id}">
             <div class="product-image-wrap cust-width">
-                <img src="images${item.image}" alt="${item.name}" onerror="this.style.display='none'">
-                <div class="scroll-item-name d-none">${item.name}</div>
-            </div>  
-        </div>
+                <img src="${productImagePath(item)}" alt="${productAlt(item)}" loading="lazy" decoding="async" onerror="this.style.display='none'">
+            </div>
+        </a>
 `).join('');
 
-  document.querySelector('.scroll-items').innerHTML = result + result;
-
-  // Add click listeners to these cards as well by getting name from hidden div inside card
-  document.querySelectorAll('.scroll-items .card').forEach(card => {
-    card.addEventListener('click', function () {
-      const productName = this.querySelector('.scroll-item-name').textContent;
-      const product = products.find(p => p.name === productName);
-      if (product) {
-        openProductModal(product);
-        showSection('products');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        localStorage.setItem('activeSection', 'products');
-      }
-    });
-  });
-
+  // Two identical copies so the -50% marquee loop is seamless
+  track.innerHTML = result + result;
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("callbackForm");
+// ---------------------------------------------------------------------------
+// Contact form (contact page only)
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('callbackForm');
+  if (!form) return;
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const popupText = document.getElementById("popupText");
-    const popupMessage = document.getElementById("popupMessage");
-    const successMessage = document.getElementById("contact-success");
+    const popupText = document.getElementById('popupText');
+    const popupMessage = document.getElementById('popupMessage');
+    const successMessage = document.getElementById('contact-success');
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const message = document.getElementById("message").value.trim();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
 
     const nameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[6-9]\d{9}$/;
 
-    let error = "";
+    let error = '';
 
     if (!nameRegex.test(name)) {
-      error = "Please enter a valid name.";
+      error = 'Please enter a valid name.';
     } else if (!emailRegex.test(email)) {
-      error = "Please enter a valid email address.";
+      error = 'Please enter a valid email address.';
     } else if (!phoneRegex.test(phone)) {
-      error = "Please enter a valid 10-digit mobile number.";
+      error = 'Please enter a valid 10-digit mobile number.';
     } else if (message.length < 5) {
-      error = "Message should contain at least 5 characters.";
+      error = 'Message should contain at least 5 characters.';
     }
 
     if (error) {
       popupText.textContent = error;
-      popupMessage.style.display = "block";
+      popupMessage.style.display = 'block';
       return;
     }
 
     try {
       const response = await fetch(
-        "https://formsubmit.co/ajax/9005f8cf26dc911de4546f409a6a5587",
+        'https://formsubmit.co/ajax/9005f8cf26dc911de4546f409a6a5587',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
           },
           body: JSON.stringify({
             name,
             email,
             phone,
             message,
-            _subject: "New Website Enquiry"
+            _subject: 'New Website Enquiry'
           })
         }
       );
 
       const result = await response.json();
 
-      if (result.success === "true" || result.success === true) {
-        successMessage.classList.remove("d-none");
+      if (result.success === 'true' || result.success === true) {
+        successMessage.classList.remove('d-none');
         form.reset();
 
         setTimeout(() => {
-          successMessage.classList.add("d-none");
+          successMessage.classList.add('d-none');
         }, 2000);
       } else {
-        popupText.textContent =
-          "Unable to submit form. Please try again.";
-        popupMessage.style.display = "block";
+        popupText.textContent = 'Unable to submit form. Please try again.';
+        popupMessage.style.display = 'block';
       }
     } catch (err) {
-      popupText.textContent =
-        "Network error. Please try again later.";
-      popupMessage.style.display = "block";
+      popupText.textContent = 'Network error. Please try again later.';
+      popupMessage.style.display = 'block';
       console.error(err);
     }
   });
 });
 
+// Close Popup Function (contact page)
 function closePopup() {
-  document.getElementById("popupMessage").style.display = "none";
-}
-
-// Close Popup Function
-function closePopup() {
-  const popupMessage = document.getElementById("popupMessage");
+  const popupMessage = document.getElementById('popupMessage');
   if (popupMessage) {
-    popupMessage.style.display = "none";
+    popupMessage.style.display = 'none';
   }
 }
 window.closePopup = closePopup;

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <url>
+    <loc>https://rajusoapworks.com/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/rsw_home_1.png</image:loc>
+      <image:title>Raju Soap Works coconut oil soap range</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://rajusoapworks.com/about/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/machine.jpg</image:loc>
+      <image:title>Soap making machine at the Raju Soap Works factory in Ulhasnagar</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://rajusoapworks.com/products/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_long_pack.jpeg</image:loc>
+      <image:title>Raju Gota 5 pcs coconut oil washing soap pack</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_coconut_four_pack.jpeg</image:loc>
+      <image:title>Raju Coconut 4 pcs coconut oil washing soap pack</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/baghicha_six_pack_front.jpeg</image:loc>
+      <image:title>Baghicha 6 pcs coconut oil washing soap pack</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/baghicha_long_pack.jpeg</image:loc>
+      <image:title>Baghicha 5 pcs coconut oil washing soap pack</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_single_green.jpeg</image:loc>
+      <image:title>Raju Gota single coconut oil washing soap cake</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_coconut_single.jpeg</image:loc>
+      <image:title>Raju Coconut single coconut oil washing soap cake</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_single.jpeg</image:loc>
+      <image:title>Raju Gota single coconut oil washing soap cake</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/anil_single.jpeg</image:loc>
+      <image:title>Anil single coconut oil washing soap cake</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/baghicha_single_pack.png</image:loc>
+      <image:title>Baghicha single coconut oil washing soap cake</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://rajusoapworks.com/images/raju_super_single.jpeg</image:loc>
+      <image:title>Raju Super single coconut oil washing soap cake</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://rajusoapworks.com/contact/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

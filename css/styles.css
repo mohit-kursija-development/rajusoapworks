@@ -23,22 +23,6 @@
   }
 }
 
-/* Section transitions */
-.page-section {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1);
-  will-change: opacity;
-}
-.page-section.active {
-  display: block;
-  opacity: 1;
-  animation: fadeInUp 1s;
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px);}
-  to { opacity: 1; transform: translateY(0);}
-}
 /* Navbar highlight */
 .nav-link.active {
   font-weight: bold;
@@ -53,6 +37,9 @@
 /* Hero section */
 .home-img{
   width: 100%;
+  /* height:auto lets the width/height attributes act as an aspect-ratio hint
+     (reserves layout space, no CLS) instead of forcing a 930px-tall box */
+  height: auto;
   max-height: 600px;
   object-fit:scale-down;
   display: block;
@@ -69,6 +56,55 @@
   text-align: center;
   /* margin-bottom: 2rem; */
 }
+/* Hero heading block (carries the page H1) */
+.hero-copy {
+  padding: 0 1rem 1.75rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hero-title {
+  color: var(--brown);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3.4vw, 2.25rem);
+  margin-bottom: 0.75rem;
+}
+.hero-lead {
+  color: #5d4a42;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.hero-actions .btn-brown {
+  border-color: var(--brown);
+  color: var(--brown);
+}
+
+/* Keyboard skip link */
+.skip-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--brown);
+  color: var(--yellow);
+}
+
+/* Breadcrumbs */
+.breadcrumb-item a {
+  color: var(--brown);
+  text-decoration: none;
+}
+.breadcrumb-item a:hover,
+.breadcrumb-item a:focus {
+  text-decoration: underline;
+}
+.breadcrumb-item.active {
+  color: #8d7b74;
+}
+
 .product-card {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -84,12 +120,60 @@
 }
 .footer {
   margin-top: 1rem;
-  padding: 1.5rem 0 0.5rem 0;
+  padding: 2rem 0 1rem 0;
   background: #f8f9fa;
   text-align: center;
   border-radius: 1rem 1rem 0 0;
   font-size: 0.95rem;
-  color: #888;
+  color: #5f5f5f;
+}
+.footer-heading {
+  color: var(--brown);
+}
+.footer address {
+  font-style: normal;
+  margin-bottom: 0;
+}
+.footer a {
+  color: var(--brown);
+  text-decoration: none;
+}
+.footer a:hover,
+.footer a:focus {
+  text-decoration: underline;
+}
+.footer-areas {
+  border-top: 1px solid #e3e3e3;
+  padding-top: 1rem;
+  color: #7a7a7a;
+}
+
+/* Contact details */
+.contact-link {
+  color: var(--brown);
+  text-decoration: none;
+}
+.contact-link:hover,
+.contact-link:focus {
+  text-decoration: underline;
+}
+#contact address {
+  font-style: normal;
+}
+
+/* FAQ accordion */
+.faq-section .accordion-button {
+  font-weight: 600;
+  color: var(--brown);
+}
+.faq-section .accordion-button:not(.collapsed) {
+  background-color: var(--yellow);
+  color: var(--brown);
+  box-shadow: none;
+}
+.faq-section .accordion-button:focus {
+  border-color: var(--brown-light);
+  box-shadow: 0 0 0 0.2rem rgba(121, 85, 72, 0.2);
 }
 
 .rounded-box{
@@ -194,6 +278,12 @@
   animation: scrollLeft 10s linear infinite;
 }
 
+/* Both halves must stay on one line for the -50% marquee loop to line up */
+.scroll-track .row {
+  flex-wrap: nowrap;
+  margin: 0;
+}
+
 /* Individual item sets */
 .scroll-items {
   display: flex;
@@ -260,6 +350,7 @@
 
 .toggler-icon{
     width: 55px;
+    height: auto;
 }
 
 /* Optional: style nav menu dropdowns if any */

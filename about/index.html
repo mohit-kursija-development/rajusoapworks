@@ -53,12 +53,22 @@
     <meta name="twitter:image" content="https://rajusoapworks.com/images/machine.jpg" />
     <meta name="twitter:image:alt" content="Soap making machine at the Raju Soap Works factory in Ulhasnagar" />
 
+    <!-- ============ Performance hints ============ -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- ============ Icons & styles ============ -->
     <link rel="icon" type="image/png" href="../images/logo.png" />
     <link rel="apple-touch-icon" href="../images/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="../css/styles.css" />
+
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
 
     <!-- ============ Structured data ============ -->
     <script type="application/ld+json">
@@ -129,17 +139,18 @@
   </head>
 
   <body>
-    <a href="#main-content" class="visually-hidden-focusable skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" aria-label="Main navigation">
+    <header class="site-header" id="siteHeader">
+      <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
         <div class="container">
-          <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="../index.html" style="color: #795548">
-            <img src="../images/logo.png" alt="Raju Soap Works logo" class="logo" width="50" height="50" onerror="this.style.display = 'none'" />
-            <span>Raju Soap Works</span>
+          <a class="navbar-brand" href="../index.html">
+            <img src="../images/logo.png" alt="Raju Soap Works logo" class="brand-logo" width="46" height="46" onerror="this.style.display = 'none'" />
+            <span class="brand-text">Raju Soap Works<small>Since 1974</small></span>
           </a>
+
           <button
-            class="navbar-toggler custom-toggler"
+            class="nav-toggle d-lg-none"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#mainNavbar"
@@ -147,125 +158,181 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <img src="../images/menu.png" alt="" width="55" height="38" class="toggler-icon" />
+            <span></span><span></span><span></span>
           </button>
+
           <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
               <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
               <li class="nav-item"><a class="nav-link active" href="../about/index.html" aria-current="page">About Us</a></li>
               <li class="nav-item"><a class="nav-link" href="../products/index.html">Products</a></li>
               <li class="nav-item"><a class="nav-link" href="../contact/index.html">Contact Us</a></li>
+              <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                <a class="btn btn-yellow" href="../contact/index.html"><i class="bi bi-telephone-fill" aria-hidden="true"></i> Get a Quote</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
 
-    <main id="main-content" style="min-height: 70vh">
-      <nav aria-label="Breadcrumb" class="container pt-3">
-        <ol class="breadcrumb small">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">About Us</li>
-        </ol>
-      </nav>
+    <main id="main-content">
+      <div class="page-head">
+        <div class="container">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">About Us</li>
+            </ol>
+          </nav>
+          <h1>About Raju Soap Works — Coconut Oil Soap Manufacturer Since the 1970s</h1>
+          <p>A family business that has made one thing, properly, for over fifty years.</p>
+        </div>
+      </div>
 
-      <section id="about" aria-labelledby="about-heading">
-        <h1 id="about-heading" class="fw-bold m-3 text-center" style="color: #795548">
-          About Raju Soap Works — Coconut Oil Soap Manufacturer Since the 1970s
-        </h1>
-        <div class="row align-items-center m-0">
-          <div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
-            <img
-              src="../images/machine.jpg"
-              alt="Soap making machine at the Raju Soap Works factory in Ulhasnagar"
-              class="img-fluid all-prdcts-img rounded shadow"
-              width="1206"
-              height="1587"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display = 'none'"
-            />
-          </div>
-          <div class="col-md-6">
-            <p>
-              Founded over 50 years ago, Raju Soap Works is a family-run business dedicated exclusively to manufacturing high-quality, coconut
-              oil-based soaps. Our factory in Ulhasnagar, Thane district, has supplied shopkeepers, distributors and households for three
-              generations. We are proud to serve Mumbai, Thane, Kalyan, Ambernath, Badlapur, Shahpur, Karjat, Kasara, Palghar, Dahanu and nearby
-              regions.
-            </p>
-            <ul class="list-unstyled mt-3">
-              <li><i class="bi bi-check-circle text-success" aria-hidden="true"></i> 100% vegetarian, Jain-friendly soaps</li>
-              <li><i class="bi bi-check-circle text-success" aria-hidden="true"></i> No animal fats or harmful chemicals</li>
-              <li><i class="bi bi-check-circle text-success" aria-hidden="true"></i> Trusted by generations</li>
-              <li><i class="bi bi-check-circle text-success" aria-hidden="true"></i> Quality soap manufacturing</li>
-            </ul>
+      <section class="section" aria-labelledby="story-heading">
+        <div class="container">
+          <div class="row g-5 align-items-center">
+            <div class="col-lg-6" data-reveal="left">
+              <div class="about-figure">
+                <img
+                  src="../images/machine.jpg"
+                  alt="Soap making machine at the Raju Soap Works factory in Ulhasnagar"
+                  width="1206"
+                  height="1587"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.style.display = 'none'"
+                />
+                <div class="about-badge">
+                  <strong>50+</strong>
+                  <span>Years</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6" data-reveal="right">
+              <span class="eyebrow"><i class="bi bi-house-heart-fill" aria-hidden="true"></i> Our story</span>
+              <h2 id="story-heading">Family-run, coconut oil only, since 1974</h2>
+              <p>
+                Founded over 50 years ago, Raju Soap Works is a family-run business dedicated exclusively to manufacturing high-quality, coconut
+                oil-based soaps. Our factory in Ulhasnagar, Thane district, has supplied shopkeepers, distributors and households for three
+                generations. We are proud to serve Mumbai, Thane, Kalyan, Ambernath, Badlapur, Shahpur, Karjat, Kasara, Palghar, Dahanu and nearby
+                regions.
+              </p>
+              <ul class="check-list">
+                <li><i class="bi bi-check-lg" aria-hidden="true"></i> 100% vegetarian, Jain-friendly soaps</li>
+                <li><i class="bi bi-check-lg" aria-hidden="true"></i> No animal fats or harmful chemicals</li>
+                <li><i class="bi bi-check-lg" aria-hidden="true"></i> Trusted by generations</li>
+                <li><i class="bi bi-check-lg" aria-hidden="true"></i> Quality soap manufacturing</li>
+              </ul>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="container my-5">
+      <section class="section-tight" aria-labelledby="values-heading">
+        <div class="container">
+          <div class="section-head" data-reveal="up">
+            <span class="eyebrow"><i class="bi bi-gem" aria-hidden="true"></i> What sets us apart</span>
+            <h2 id="values-heading">Three things we never compromise on</h2>
+            <div class="rule"></div>
+          </div>
+
           <div class="row g-4">
-            <div class="col-md-4">
-              <h2 class="h5" style="color: #795548">Made with coconut oil</h2>
-              <p class="text-muted">
-                Coconut oil is the base of every bar we make. It lathers quickly even in hard water, rinses clean, and stays gentle on the hands
-                during daily washing — which is why our customers have stayed with us for decades.
-              </p>
+            <div class="col-md-4" data-reveal="up" style="--reveal-delay: 0ms">
+              <div class="value-card">
+                <span class="value-num">01</span>
+                <h3>Made with coconut oil</h3>
+                <p>
+                  Coconut oil is the base of every bar we make. It lathers quickly even in hard water, rinses clean, and stays gentle on the hands
+                  during daily washing — which is why our customers have stayed with us for decades.
+                </p>
+              </div>
             </div>
-            <div class="col-md-4">
-              <h2 class="h5" style="color: #795548">Jain-friendly and vegetarian</h2>
-              <p class="text-muted">
-                We use 100% vegetable oil and no animal fats of any kind. Families who keep a Jain or vegetarian household can use our soap without
-                a second thought, and shopkeepers can stock it with confidence.
-              </p>
+            <div class="col-md-4" data-reveal="up" style="--reveal-delay: 110ms">
+              <div class="value-card">
+                <span class="value-num">02</span>
+                <h3>Jain-friendly and vegetarian</h3>
+                <p>
+                  We use 100% vegetable oil and no animal fats of any kind. Families who keep a Jain or vegetarian household can use our soap without
+                  a second thought, and shopkeepers can stock it with confidence.
+                </p>
+              </div>
             </div>
-            <div class="col-md-4">
-              <h2 class="h5" style="color: #795548">Wholesale supply, by the box</h2>
-              <p class="text-muted">
-                Every product is packed for both retail and wholesale — packets of 1 to 6 cakes, and boxes of 10 to 60 packets. Retailers,
-                distributors and institutional buyers across the Mumbai and Thane belt order from us directly.
-              </p>
+            <div class="col-md-4" data-reveal="up" style="--reveal-delay: 220ms">
+              <div class="value-card">
+                <span class="value-num">03</span>
+                <h3>Wholesale supply, by the box</h3>
+                <p>
+                  Every product is packed for both retail and wholesale — packets of 1 to 6 cakes, and boxes of 10 to 60 packets. Retailers,
+                  distributors and institutional buyers across the Mumbai and Thane belt order from us directly.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="text-center my-4">
-          <a href="../products/index.html" class="btn btn-yellow shadow">Browse Our Soap Range</a>
+      <section class="section-tight" aria-labelledby="about-cta-heading">
+        <div class="container">
+          <div class="stats text-center" data-reveal="up">
+            <h2 id="about-cta-heading" class="text-cream mb-3">See the full soap range</h2>
+            <p class="mx-auto mb-4" style="max-width: 52ch; color: rgba(253, 250, 213, 0.82)">
+              Ten coconut oil soap varieties, available by the packet and by the box.
+            </p>
+            <div class="btn-group-cta">
+              <a href="../products/index.html" class="btn btn-brown btn-lg"><i class="bi bi-grid-fill" aria-hidden="true"></i> Browse Our Soap Range</a>
+              <a href="../contact/index.html" class="btn btn-ghost btn-lg"><i class="bi bi-envelope-fill" aria-hidden="true"></i> Contact Us</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
       <div class="container">
-        <div class="row text-start g-4 pb-3">
-          <div class="col-md-4 col-12">
-            <h2 class="h6 fw-bold footer-heading">Raju Soap Works</h2>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h2 class="footer-heading">Raju Soap Works</h2>
             <p class="mb-0">
               Coconut oil soap manufacturer in Ulhasnagar with over 50 years of experience. 100% vegetarian and Jain-friendly soap bars, made with
               no animal fats or harsh chemicals.
             </p>
           </div>
-          <div class="col-md-4 col-6">
-            <h2 class="h6 fw-bold footer-heading">Quick Links</h2>
-            <ul class="list-unstyled mb-0">
+          <div class="col-6 col-lg-4">
+            <h2 class="footer-heading">Quick Links</h2>
+            <ul class="footer-links">
               <li><a href="../index.html">Home</a></li>
               <li><a href="../about/index.html">About Us</a></li>
               <li><a href="../products/index.html">Products</a></li>
               <li><a href="../contact/index.html">Contact Us</a></li>
             </ul>
           </div>
-          <div class="col-md-4 col-6">
-            <h2 class="h6 fw-bold footer-heading">Get in Touch</h2>
-            <address class="mb-2">Gala B11, Mahadev compound, Dhobighat Rd, Ulhasnagar, Maharashtra 421001</address>
+          <div class="col-6 col-lg-4">
+            <h2 class="footer-heading">Get in Touch</h2>
+            <address>Gala B11, Mahadev compound, Dhobighat Rd, Ulhasnagar, Maharashtra 421001</address>
             <p class="mb-1"><a href="tel:+919028306611">+91 9028306611</a></p>
             <p class="mb-0"><a href="mailto:rajusoapworks@gmail.com">rajusoapworks@gmail.com</a></p>
           </div>
         </div>
-        <p class="footer-areas small mb-2">
-          Serving Mumbai, Thane, Ulhasnagar, Kalyan, Ambernath, Badlapur, Shahpur, Karjat, Kasara, Palghar and Dahanu.
-        </p>
-        <p class="mb-0">&copy; <span id="current-year"></span> Raju Soap Works. All rights reserved.</p>
+        <div class="footer-bottom">
+          <p class="footer-areas">
+            Serving Mumbai, Thane, Ulhasnagar, Kalyan, Ambernath, Badlapur, Shahpur, Karjat, Kasara, Palghar and Dahanu.
+          </p>
+          <p class="mb-0">&copy; <span id="current-year"></span> Raju Soap Works. All rights reserved.</p>
+        </div>
       </div>
     </footer>
+
+    <div class="fab-stack">
+      <a class="fab fab-whatsapp" href="https://wa.me/919028306611" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+      </a>
+      <button class="fab fab-top" id="backToTop" type="button" aria-label="Back to top">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+      </button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script.js"></script>

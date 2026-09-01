@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercise GIF Library — Search &amp; Filter</title>
+<meta name="description" content="Browse, search, and filter 1,324 exercise animation GIFs by body part, target muscle, and equipment.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">🏋️</span>
+      <span class="brand-text">Exercise GIF Library</span>
+    </a>
+    <p class="header-sub">1,324 exercises · search by name, body part, or muscle</p>
+  </div>
+</header>
+
+<main>
+  <section class="controls" aria-label="Search and filters">
+    <div class="controls-inner">
+      <div class="search-row">
+        <label class="visually-hidden" for="searchInput">Search exercises</label>
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="search" id="searchInput" placeholder="Search by exercise name, body part, or muscle…" autocomplete="off">
+        <button type="button" id="clearSearch" class="clear-btn" aria-label="Clear search" hidden>&times;</button>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-group">
+          <label for="bodyPartFilter">Body part</label>
+          <select id="bodyPartFilter">
+            <option value="">All body parts</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="muscleFilter">Muscle</label>
+          <select id="muscleFilter">
+            <option value="">All muscles</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="equipmentFilter">Equipment</label>
+          <select id="equipmentFilter">
+            <option value="">All equipment</option>
+          </select>
+        </div>
+        <button type="button" id="resetFilters" class="reset-btn">Reset</button>
+      </div>
+
+      <div class="result-row">
+        <p id="resultCount" class="result-count" aria-live="polite">Loading exercises…</p>
+        <div class="view-toggle" role="group" aria-label="GIF playback mode">
+          <button type="button" id="playAllToggle" class="toggle-btn" aria-pressed="false">
+            Autoplay all GIFs
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-section">
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <p id="emptyState" class="empty-state" hidden>No exercises match your search. Try a different term or reset the filters.</p>
+    <p id="loadMoreWrap" class="load-more-wrap" hidden>
+      <button type="button" id="loadMoreBtn" class="load-more-btn">Show more</button>
+    </p>
+  </section>
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden></div>
+<div class="modal" id="exerciseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+  <div class="modal-media">
+    <img id="modalGif" src="" alt="">
+  </div>
+  <div class="modal-body">
+    <h2 id="modalTitle"></h2>
+    <div class="modal-tags" id="modalTags"></div>
+    <h3 class="modal-heading">Instructions</h3>
+    <ol id="modalSteps" class="modal-steps"></ol>
+    <p class="modal-attribution" id="modalAttribution"></p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Exercise data and media courtesy of the <a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" rel="noopener">hasaneyldrm/exercises-dataset</a> project. Media © Gym visual — <a href="https://gymvisual.com/" target="_blank" rel="noopener">gymvisual.com</a>, redistributed at 180×180 per the dataset's <a href="NOTICE.md">NOTICE</a>. Dataset text/code under the <a href="LICENSE">MIT License</a>.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
